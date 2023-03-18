@@ -1,0 +1,40 @@
+<div class="container mt-5">
+    <div class="card w-sm-100 shadow px-4 py-6 mb-5 border-light bg-body-tertiary rounded">
+        <div class="card-body table-responsive">
+            <div class="d-flex justify-content-between">
+                <h3 class="card-title mb-5">Usuarios de GitHub</h3>
+
+                <div class="input-group mb-3 h-25 w-25">
+                    <input type="text" class="form-control" [(ngModel)]="search" placeholder="Bucar usuario">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2" (click)="GetUsers()">Buscar</button>
+                </div>
+            </div>
+            <table *ngIf="users" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Perfil</th>
+                        <th scope="col">Repositorios</th>
+                        <th scope="col">Ver más</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users; let i=index">
+                        <th scope="row">{{ i+1 }}</th>
+                        <td>{{ user.login }}</td>
+                        <td>{{ user.type }}</td>
+                        <td> <a [href]="user.html_url" target="_blank"> Perfil <i class="bi bi-github"></i></a></td>
+                        <td><a [href]="user.html_url + '?tab=repositories'" target="_blank"> Repositorios <i class="bi bi-git"></i></a></td>
+                        <td> ... </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="!users" class="text-center">
+                <i class="bi bi-search" style="font-size: 90px;"></i>
+                <h4>Sin resultados</h4>
+            </div>
+        </div>
+    </div>
+</div>
